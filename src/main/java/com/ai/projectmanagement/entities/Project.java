@@ -1,18 +1,21 @@
 package com.ai.projectmanagement.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long projectId;
     private String name;
     private String stage; //NOTSTARTED,COMPLETED,INPROGRESS
     private String description;
 
-    @OneToMany(mappedBy = "project")
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST}
+            , fetch = FetchType.LAZY)
+    @JoinTable(name = "project_employee",joinColumns = @JoinColumn(name = "project_id"),inverseJoinColumns =@JoinColumn(name = "employee_id") )
     private List<Employee> employees;
 
 
@@ -65,5 +68,14 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void addEmployee(Employee emp1) {
+
+        if (employees == null){
+            employees = new ArrayList<>();
+        }
+        employees.add(emp1);
+
     }
 }

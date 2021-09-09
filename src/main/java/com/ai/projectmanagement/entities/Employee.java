@@ -2,21 +2,23 @@ package com.ai.projectmanagement.entities;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long employeeId;
     private String firstName;
     private String lastName;
     private String email;
 
 
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST}
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST}
     , fetch = FetchType.LAZY)
-    @JoinColumn(name="project_id")
-    private Project project;
+    @JoinTable(name = "project_employee",joinColumns = @JoinColumn(name = "employee_id"),inverseJoinColumns =@JoinColumn(name = "project_id") )
+
+    private List<Project> project;
 
     public Employee() {
 
@@ -30,13 +32,6 @@ public class Employee {
         this.email = email;
     }
 
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
 
     public long getEmployeeId() {
         return employeeId;
