@@ -23,7 +23,6 @@ new Chart(document.getElementById("myPieChart"),{
             datasets: [{
                 label: "My First dataset",
                 backgroundColor: ["#3e95cd","#8e5ea2","#3cba9f"],
-                borderColor: 'rgb(255, 99, 132)',
                 data: numericData,
             }]
         },
@@ -40,7 +39,7 @@ new Chart(document.getElementById("myPieChart"),{
 
 });
 
-// converting to json
+// converting from cryptic to String
 function decodeHtml(html){
     let txt = document.createElement("textarea");
 
