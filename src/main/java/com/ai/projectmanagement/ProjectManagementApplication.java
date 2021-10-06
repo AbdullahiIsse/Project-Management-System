@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
 
-@SpringBootApplication(scanBasePackages= {"com.ai.projectmanagement","com.ai.utils"})
+@SpringBootApplication(scanBasePackages= {"com.ai.projectmanagement","com.ai.utils","com.ai.utils"})
 public class ProjectManagementApplication {
 
 
