@@ -1,7 +1,7 @@
 package com.ai.projectmanagement.controller;
 
-import com.ai.projectmanagement.dao.EmployeeRepository;
 import com.ai.projectmanagement.entities.Employee;
+import com.ai.projectmanagement.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,13 +16,13 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    EmployeeRepository empRepo;
+    EmployeeService empService;
 
 
     @GetMapping()
     public String displayEmployeeList(Model model){
 
-        List<Employee> employeeList = empRepo.findAll();
+        List<Employee> employeeList = empService.findAll();
         model.addAttribute("employeeList",employeeList);
 
         return "employees/Employee";
@@ -41,7 +41,7 @@ public class EmployeeController {
 
     @PostMapping("/save")
     public String AddEmployee(Employee employee,Model model){
-        empRepo.save(employee);
+        empService.save(employee);
         // use a redirect to prevent duplicate submissions
         return "redirect:/employees/new";
 

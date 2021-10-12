@@ -23,9 +23,10 @@ public class APIController {
     EmployeeRepository empRepo;
 
     @GetMapping("/test")
-    public ResponseEntity<Lisa<t<Employee>> getproject(){
+    public ResponseEntity<List<Employee>>getAllEmployees(){
 
         List<Employee> employeeList = empRepo.findAll();
+      
 
         return new ResponseEntity<List<Employee>>(employeeList, HttpStatus.OK);
 
