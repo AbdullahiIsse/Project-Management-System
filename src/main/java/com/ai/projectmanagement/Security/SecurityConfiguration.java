@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/projects/save").hasAuthority("ADMIN")
                 .antMatchers("/employees/new").hasAuthority("ADMIN")
                 .antMatchers("/employees/save").hasAuthority("ADMIN")
-                .antMatchers("/", "/**").permitAll().and().formLogin();
+                .antMatchers("/", "/**").permitAll().and().formLogin().and().csrf().ignoringAntMatchers("/app-api-**").ignoringAntMatchers("/app-api-employees/**").ignoringAntMatchers("/app-api-projects/**");
 
 
     }

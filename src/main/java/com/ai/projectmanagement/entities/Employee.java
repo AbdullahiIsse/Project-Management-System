@@ -1,7 +1,14 @@
 package com.ai.projectmanagement.entities;
 
 
+import com.ai.projectmanagement.validators.UniqueValue;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -10,14 +17,24 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_generator")
     @SequenceGenerator(name = "employee_generator",sequenceName = "employee_seq", allocationSize = 1)
     private long employeeId;
+
+
+    @NotNull
+    @Size(min = 2, max = 50)
     private String firstName;
+    @NotNull
+    @Size(min = 1, max = 50)
     private String lastName;
+    @NotNull
+    @Email
+    @UniqueValue
     private String email;
 
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST}
     , fetch = FetchType.LAZY)
     @JoinTable(name = "project_employee",joinColumns = @JoinColumn(name = "employee_id"),inverseJoinColumns =@JoinColumn(name = "project_id") )
+    @JsonIgnore
     private List<Project> project;
 
     public Employee() {

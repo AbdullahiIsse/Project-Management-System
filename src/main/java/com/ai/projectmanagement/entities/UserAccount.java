@@ -1,6 +1,7 @@
 package com.ai.projectmanagement.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "user_accounts")
@@ -12,6 +13,7 @@ public class UserAccount {
     private long userId;
 
     @Column(name = "username")
+
     private String Username;
 
     private String email;
