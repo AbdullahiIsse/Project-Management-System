@@ -36,6 +36,15 @@ public class ProjectService {
 
     }
 
+    public Project findById(long id){
+        return proRepo.findById(id).get();
+    }
+
+
+    public void deleteById(long id){
+        proRepo.deleteById(id);
+    }
+
 
 
 

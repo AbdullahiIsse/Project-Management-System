@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -57,6 +58,42 @@ public class ProjectController {
 
 
     }
+
+    @GetMapping("/update")
+    public String updateProjects(@RequestParam long id,Model model){
+
+       Project project = proService.findById(id);
+
+
+       model.addAttribute("project",project);
+
+        List<Employee> all = empService.findAll();
+
+        model.addAttribute("allEmployyes",all);
+
+
+
+        return "projects/new-project";
+    }
+
+
+    @GetMapping("/delete")
+    public String deleteProject(@RequestParam long id,Model model){
+
+        Project project = proService.findById(id);
+
+        proService.deleteById(project.getProjectId());
+
+
+        return "redirect:/projects";
+    }
+
+
+
+
+
+
+
 
 
 }
