@@ -5,9 +5,7 @@ import com.ai.projectmanagement.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,6 +41,31 @@ public class EmployeeController {
     public String AddEmployee(Employee employee,Model model){
         empService.save(employee);
         // use a redirect to prevent duplicate submissions
+        return "redirect:/employees";
+
+    }
+
+    @GetMapping("/update")
+    public String updateEmployee(@RequestParam long id,Model model){
+
+        Employee employee = empService.findById(id);
+
+        model.addAttribute("employee",employee);
+
+        return "employees/new-employee";
+
+
+    }
+
+
+    @GetMapping("/delete")
+    public String deleteEmployee(@RequestParam long  id,Model model){
+
+        Employee employee1 = empService.findById(id);
+
+        empService.deleteById(employee1.getEmployeeId());
+
+
         return "redirect:/employees";
 
 

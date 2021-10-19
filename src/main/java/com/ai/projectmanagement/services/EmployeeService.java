@@ -33,6 +33,19 @@ public class EmployeeService {
 
     }
 
+    public void deleteById(long id){
+        empRepo.deleteById(id);
+
+    }
+
+
+    public Employee findById(long id){
+
+        return empRepo.findById(id).get();
+    }
+
+
+
 
 
 
